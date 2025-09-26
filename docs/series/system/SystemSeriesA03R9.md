@@ -19,18 +19,18 @@ This is a dedicated example for the AlmaLinux 9.x series, demonstrating how to i
 
 ## 🔖 Variant I: Install Binary Driver
 
-➡️ Enable PowerTools:
+➡️ Enable CRB:
 
 ```
-sudo dnf config-manager --set-enabled powertools
+sudo dnf config-manager --set-enabled crb
 sudo dnf makecache
 ```
 
 ➡️ Add EPEL9
 
 ```
-sudo dnf -y install epel-release
-sudo dnf upgrade
+sudo dnf install -y epel-release
+sudo dnf makecache
 ```
 
 ➡️ Add NVIDIA Repository:
@@ -49,8 +49,15 @@ sudo dnf module install nvidia-driver:latest
 ➡️ Install third-party libraries for CUDA:
 
 ```
-sudo dnf install freeglut-devel libX11-devel libXi-devel libXmu-devel make mesa-libGLU-devel freeimage-devel libglfw3-devel
+sudo dnf install freeglut-devel libX11-devel libXi-devel libXmu-devel make mesa-libGLU-devel freeimage-devel glfw-devel dkms
 ```
+
+ℹ️ **Note:** Ensure your running kernel matches the installed kernel-devel:
+
+uname -r
+rpm -q kernel-devel
+
+If they differ after updates, reboot to the new kernel before continuing.
 
 ## 🔖 Variant II: Compile Driver Source
 
